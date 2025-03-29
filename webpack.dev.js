@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const fs = require('fs');
 
 module.exports = {
   mode: 'development',
@@ -12,6 +13,13 @@ module.exports = {
     port: 3001,
     historyApiFallback: true,
     hot: true,
+    https: {
+      key: fs.readFileSync('./.cert/key.pem'),
+      cert: fs.readFileSync('./.cert/cert.pem'),
+    },
+    proxy: {
+      '/api': 'http://localhost:3001'
+    }
   },
   module: {
     rules: [
