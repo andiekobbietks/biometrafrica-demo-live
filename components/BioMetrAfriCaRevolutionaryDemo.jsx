@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ProgressIndicator from './ProgressIndicator';
 import ErrorMessage from './ErrorMessage';
@@ -9,8 +9,57 @@ const BioMetrAfriCaRevolutionaryDemo = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [showPrivacySettings, setShowPrivacySettings] = useState(false);
   const { isAuthenticated, isLoading, error, authenticate, retry } = useAuth();
+  const [isOnline, setIsOnline] = useState(window.navigator.onLine);
+  const [appReady, setAppReady] = useState(false);
   
   const totalSteps = 4;
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    // Check if app is ready
+    const checkAppReady = async () => {
+      try {
+        // Add your API health check endpoint here
+        const response = await fetch('/api/health');
+        if (response.ok) {
+          setAppReady(true);
+        }
+      } catch (error) {
+        console.error('App initialization failed:', error);
+      }
+    };
+
+    checkAppReady();
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  if (!isOnline) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="bg-red-50 p-4 rounded-lg text-center">
+          <h2 className="text-red-800">Connection Lost</h2>
+          <p>Please check your internet connection and try again.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!appReady) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   const handlePrivacySettingsSave = (settings) => {
     console.log('Privacy settings saved:', settings);
