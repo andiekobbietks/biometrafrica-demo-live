@@ -18,7 +18,9 @@
     "start": "cross-env PORT=3001 HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "webpack serve --config webpack.dev.js",
+    "server": "node server.js"
   },
   "eslintConfig": {
     "extends": [
