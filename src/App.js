@@ -1,9 +1,9 @@
 import React from 'react';
-import './index.css';
+import './App.css';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="App">
       <h1 className="text-3xl font-bold text-center py-8">
         Welcome to BioMetrAfriCa
       </h1>
