@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Shield, Fingerprint, Database, Check, X, RefreshCw, Lock, Zap, Award, FileText, Users, Globe, BookOpen, LightbulbIcon, AlertTriangle, Brain, Briefcase, Layers, ChevronRight, Info, UserCircle, Clock, Search, Share2, PieChart, GitBranch, Truck, Code, Server } from 'lucide-react';
+import '../styles/tailwind.css'; // Add this import
 
 const BioMetrAfriCaSimulation = () => {
   const [stage, setStage] = useState(0);
