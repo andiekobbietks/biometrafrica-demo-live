@@ -10,7 +10,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "framer-motion": "^10.16.4"
   },
   "scripts": {
     "prestart": "if [ ! -f ./.cert/cert.pem ]; then mkdir -p .cert && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./.cert/key.pem -out ./.cert/cert.pem -subj '/C=US/ST=Any/L=Any/O=Any/OU=Any/CN=localhost'; fi",
