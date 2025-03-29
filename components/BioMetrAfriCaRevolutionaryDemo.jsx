@@ -3,37 +3,34 @@ import { motion } from 'framer-motion';
 import ProgressIndicator from './ProgressIndicator';
 import ErrorMessage from './ErrorMessage';
 import PrivacyControls from './PrivacyControls';
+import useAuth from '../hooks/useAuth';
 
 const BioMetrAfriCaRevolutionaryDemo = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 4; // Update based on your actual flow
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [error, setError] = useState(null);
-  const [isRetrying, setIsRetrying] = useState(false);
   const [showPrivacySettings, setShowPrivacySettings] = useState(false);
+  const { isAuthenticated, isLoading, error, authenticate, retry } = useAuth();
   
+  const totalSteps = 4;
+
   const handlePrivacySettingsSave = (settings) => {
     console.log('Privacy settings saved:', settings);
     // Implement logic to save settings
     setShowPrivacySettings(false);
   };
 
-  // Add a retry handler
-  const handleRetry = () => {
-    setError(null);
-    setIsRetrying(true);
-    // Retry logic depending on where the error occurred
-    setTimeout(() => {
-      setIsRetrying(false);
-      // Reset states as needed
-    }, 1000);
+  const handleContinue = () => {
+    if (currentStep === totalSteps) {
+      authenticate();
+    } else {
+      setCurrentStep(prev => prev + 1);
+    }
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <ProgressIndicator currentStep={currentStep} totalSteps={totalSteps} />
       
-      {error && <ErrorMessage message={error} onRetry={handleRetry} />}
+      {error && <ErrorMessage message={error} onRetry={retry} />}
       
       <div className="mt-4 text-right">
         <button 
@@ -89,15 +86,14 @@ const BioMetrAfriCaRevolutionaryDemo = () => {
         </motion.div>
       )}
       
-      {/* Example of button with accessibility improvements */}
       <button 
-        onClick={() => setCurrentStep(currentStep < totalSteps ? currentStep + 1 : currentStep)}
-        className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition focus:ring-2 focus:ring-primary focus:outline-none"
+        onClick={handleContinue}
+        disabled={isLoading}
+        className={`bg-primary text-white px-6 py-2 rounded-lg transition focus:ring-2 focus:ring-primary focus:outline-none
+          ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-dark'}`}
         aria-label="Continue to next step"
-        tabIndex="0"
-        onKeyDown={(e) => e.key === 'Enter' && setCurrentStep(currentStep < totalSteps ? currentStep + 1 : currentStep)}
       >
-        Continue
+        {isLoading ? 'Processing...' : 'Continue'}
         <span className="sr-only">to the next authentication step</span>
       </button>
     </div>
