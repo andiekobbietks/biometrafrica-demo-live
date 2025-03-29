@@ -10,13 +10,9 @@ module.exports = {
     filename: 'bundle.js',
   },
   devServer: {
-    port: 3001,
-    historyApiFallback: true,
+    port: 3000,
     hot: true,
-    https: {
-      key: fs.readFileSync('./.cert/key.pem'),
-      cert: fs.readFileSync('./.cert/cert.pem'),
-    },
+    open: true,
     proxy: {
       '/api': 'http://localhost:3001'
     }
@@ -26,7 +22,9 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: {
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.css$/,

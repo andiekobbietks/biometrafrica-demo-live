@@ -19,11 +19,11 @@
   "scripts": {
     "prestart": "if [ ! -f ./.cert/cert.pem ]; then mkdir -p .cert && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./.cert/key.pem -out ./.cert/cert.pem -subj '/C=US/ST=Any/L=Any/O=Any/OU=Any/CN=localhost'; fi",
     "start": "concurrently \"npm run server\" \"npm run dev\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "server": "node server.js",
     "dev": "webpack serve --config webpack.dev.js",
-    "server": "node server.js"
+    "build": "webpack --config webpack.dev.js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
