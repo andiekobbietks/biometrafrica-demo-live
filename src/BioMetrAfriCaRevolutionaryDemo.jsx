@@ -1459,4 +1459,26 @@ const BioMetrAfriCaSimulation = () => {
   );
 };
 
+const BioMetrAfriCaRevolutionaryDemo = () => {
+  return (
+    <div className="demo-container p-4 bg-gray-100 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-indigo-600">Revolutionary Biometric Solution</h2>
+      <p className="mb-4 text-gray-700">
+        Welcome to BioMetrAfrica's revolutionary biometric demonstration. Our cutting-edge technology provides secure and reliable identification solutions for Africa.
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-white p-4 rounded shadow">
+          <h3 className="text-lg font-semibold mb-2">Fingerprint Authentication</h3>
+          <p className="text-gray-600">High-accuracy fingerprint recognition with liveness detection.</p>
+        </div>
+        <div className="bg-white p-4 rounded shadow">
+          <h3 className="text-lg font-semibold mb-2">Facial Recognition</h3>
+          <p className="text-gray-600">Advanced facial recognition with anti-spoofing technology.</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default BioMetrAfriCaSimulation;
+export { BioMetrAfriCaRevolutionaryDemo };

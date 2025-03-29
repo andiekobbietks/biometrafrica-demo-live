@@ -1,14 +1,18 @@
-import React from 'react';
-// This line imports your component from the file you created
-import BioMetrAfriCaRevolutionaryDemo from './BioMetrAfriCaRevolutionaryDemo';
-// You likely don't need the default App.css, you can remove this line:
-// import './App.css';
+import React from 'react'
+import './App.css'
+import BioMetrAfriCaRevolutionaryDemo from './BioMetrAfriCaRevolutionaryDemo'
 
 function App() {
-  // The App component now only renders your main demo component
   return (
-    <BioMetrAfriCaRevolutionaryDemo />
-  );
+    <div className="app-container">
+      <header className="app-header">
+        <h1>BioMetrAfrica Demo</h1>
+      </header>
+      <main>
+        <BioMetrAfriCaRevolutionaryDemo />
+      </main>
+    </div>
+  )
 }
 
-export default App;
+export default App
